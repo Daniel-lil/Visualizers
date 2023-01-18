@@ -11,6 +11,7 @@ let knight;
 let shooter;
 let racing;
 let cowboy;
+let titleScreen;
 
 let map;
 
@@ -69,6 +70,7 @@ function preload() {
   shooter = loadImage('assets/images/shooter.png');
   vampire = loadImage('assets/images/vampire.png');
   map = loadImage('assets/images/map.png');
+  titleScreen = loadImage('assets/images/title screen.png');
   //preloading song
   fc_Simulator_Song = loadSound(`assets/sounds/FC_Simulator music.mp3`);
 
@@ -155,7 +157,8 @@ function displayTitle() {
   //defines fade in preset to put into alpha
   fadeIn = fadeIn + fadeInSpeed;
   push();
-
+  imageMode(CENTER);
+  image(titleScreen, 960, 540);
   pop();
 }
 
