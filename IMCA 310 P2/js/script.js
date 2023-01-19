@@ -34,9 +34,9 @@ let fadeInSpeed = 1;
 let saucerPiece1 = {
   x: 418,
   y: 860,
-  width:75,
-  height:3,
-  roundness:100,
+  width: 75,
+  height: 3,
+  roundness: 100,
   vx: 0,
   vy: 0,
   speed: 3,
@@ -46,14 +46,14 @@ let saucerPiece1 = {
 let saucerPiece2 = {
   x: 418,
   y: 860,
-  width:3,
-  height:75,
-  roundness:100,
+  width: 3,
+  height: 75,
+  roundness: 100,
   vx: 0,
   vy: 0,
   speed: 3,
   fill: 255
-  }
+}
 
 //telling program which state to begin inspect
 let state = `title`;
@@ -168,18 +168,17 @@ function keyPressed() {
   if (state === `title`) {
     state = `flight simulation`;
     fadeIn = 0;
-    //trymusic();
+    trymusic();
   }
 }
 
-/*
+
 //check if music is playing + play if its not
 function trymusic() {
-  if (!fc_Simulator_Song.isPlaying()) {
+  if (!fc_Simulator_Song.isPlaying() || !detective_song.isPlaying() || !knight_song.isPlaying() || !vampire_song.isPlaying() || !racing_song.isPlaying() || !shooter_song.isPlaying() || !cowboy_song.isPlaying()) {
     fc_Simulator_Song.loop();
   }
 }
-*/
 
 
 function displaySaucerWithFade() {
@@ -197,20 +196,12 @@ function displaySaucerWithFade() {
   pop();
 }
 
-/*brings simulation back to title state
-function restartSimulation() {
-  setTimeout(function() {
-    state = `title`;
-    resetShipPosition();
-  }, time)
-}
-*/
-
 //returns pilot from planet view to flight mode
 function returnToFlight() {
   if (state === `knight` || state === `vampire` || state === `shooter` || state === `detective` || state === `racing` || state === `cowboy`) {
     state = `flight simulation`;
-      //resetShipPosition();
+    //resetShipPosition();
+    trymusic();
   }
 }
 
@@ -218,22 +209,22 @@ function returnToFlight() {
 function displayPlanets() {
   imageMode(CENTER);
   image(map, 960, 540);
-push();
-//robot
-fill(0,0,0,0);
-noStroke();
-  ellipse(918, 280, 80,);
-//detective
-    ellipse(620, 160, 80,);
-//cowboy
-      ellipse(568, 420, 80);
-//knight
-        ellipse(853, 718, 80);
-//racing
-          ellipse(1330, 370, 80);
-//vampire
-            ellipse(1410, 790, 80);
-            pop();
+  push();
+  //robot
+  fill(0, 0, 0, 0);
+  noStroke();
+  ellipse(918, 280, 80, );
+  //detective
+  ellipse(620, 160, 80, );
+  //cowboy
+  ellipse(568, 420, 80);
+  //knight
+  ellipse(853, 718, 80);
+  //racing
+  ellipse(1330, 370, 80);
+  //vampire
+  ellipse(1410, 790, 80);
+  pop();
 }
 
 function displaySaucer() {
@@ -294,76 +285,67 @@ function moveSaucer() {
   saucerPiece2.y = saucerPiece2.y + saucerPiece2.vy;
 }
 
-/*
-//choose whether to go with alien or not
-function mousePressed() {
-  if (state === `flight simulation` && mouseX < 375) {
-    state = `home`;
-    fadeIn = 0;
-    restartSimulation();
-  } else if (state === `choice` && mouseX > 375) {
-    state = `instructions`;
-    fadeIn = 0;
-    startFlight();
-  }
-}
-*/
-
 //check if the saucer is on a planet to trigger state
 //function checkIfOnPlanet() {
 function mousePressed() {
 
-  if (state === `flight simulation`){
+  if (state === `flight simulation`) {
 
     //earth
     let d = dist(mouseX, mouseY, 918, 290);
-  if (d < saucerPiece1.width / 2 + 50 / 2) {
-    state = `shooter`;
-    shooter_song.play();
-    fadeIn = 0;
-    shooter_song.onended(returnToFlight);
-  }
-  //saturn
-  let saturnDist = dist(mouseX, mouseY, 620, 160);
-  if (saturnDist < saucerPiece1.width / 2 + 66 / 2) {
-    state = `detective`;
-    detective_song.play();
-    fadeIn = 0;
-detective_song.onended(returnToFlight);
-  }
-  //uranus
-  let uranusDist = dist(mouseX, mouseY, 568, 420);
-  if (uranusDist < saucerPiece1.width / 2 + 54 / 2) {
-    state = `cowboy`;
+    if (d < saucerPiece1.width / 2 + 50 / 2) {
+      state = `shooter`;
+      fc_Simulator_Song.stop();
+      shooter_song.play();
+      fadeIn = 0;
+      shooter_song.onended(returnToFlight);
+    }
+    //saturn
+    let saturnDist = dist(mouseX, mouseY, 620, 160);
+    if (saturnDist < saucerPiece1.width / 2 + 66 / 2) {
+      state = `detective`;
+      fc_Simulator_Song.stop();
+      detective_song.play();
+      fadeIn = 0;
+      detective_song.onended(returnToFlight);
+    }
+    //uranus
+    let uranusDist = dist(mouseX, mouseY, 568, 420);
+    if (uranusDist < saucerPiece1.width / 2 + 54 / 2) {
+      state = `cowboy`;
+      fc_Simulator_Song.stop();
       cowboy_song.play();
-    fadeIn = 0;
-cowboy_song.onended(returnToFlight);
+      fadeIn = 0;
+      cowboy_song.onended(returnToFlight);
+    }
+    //venus
+    let venusDist = dist(mouseX, mouseY, 853, 718);
+    if (venusDist < saucerPiece1.width / 2 + 30 / 2) {
+      state = `knight`;
+      fc_Simulator_Song.stop();
+      knight_song.play();
+      fadeIn = 0;
+      knight_song.onended(returnToFlight);
+    }
+    //mercury
+    let mercuryDist = dist(mouseX, mouseY, 1330, 370);
+    if (mercuryDist < saucerPiece1.width / 2 + 24 / 2) {
+      state = `racing`;
+      fc_Simulator_Song.stop();
+      racing_song.play();
+      fadeIn = 0;
+      racing_song.onended(returnToFlight);
+    }
+    //jupiter
+    let jupiterDist = dist(mouseX, mouseY, 1410, 790);
+    if (jupiterDist < saucerPiece1.width / 2 + 79 / 2) {
+      state = `vampire`;
+      fc_Simulator_Song.stop();
+      vampire_song.play();
+      fadeIn = 0;
+      vampire_song.onended(returnToFlight);
+    }
   }
-  //venus
-  let venusDist = dist(mouseX, mouseY, 853, 718);
-  if (venusDist < saucerPiece1.width / 2 + 30 / 2) {
-    state = `knight`;
-    knight_song.play();
-    fadeIn = 0;
-knight_song.onended(returnToFlight);
-  }
-  //mercury
-  let mercuryDist = dist(mouseX, mouseY, 1330, 370);
-  if (mercuryDist < saucerPiece1.width / 2 + 24 / 2) {
-    state = `racing`;
-    racing_song.play();
-    fadeIn = 0;
-racing_song.onended(returnToFlight);
-  }
-  //jupiter
-  let jupiterDist = dist(mouseX, mouseY, 1410, 790);
-  if (jupiterDist < saucerPiece1.width / 2 + 79 / 2) {
-    state = `vampire`;
-    vampire_song.play();
-    fadeIn = 0;
-    vampire_song.onended(returnToFlight);
-  }
-}
 }
 
 //puts ship back in starting
