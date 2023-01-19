@@ -16,7 +16,7 @@ let titleScreen;
 let map;
 
 //declaring name of song
-let fc_Simulator_Song;
+let music_loop;
 
 let cowboy_song;
 let detective_song;
@@ -72,7 +72,7 @@ function preload() {
   map = loadImage('assets/images/map.png');
   titleScreen = loadImage('assets/images/title screen.png');
   //preloading song
-  fc_Simulator_Song = loadSound(`assets/sounds/FC_Simulator music.mp3`);
+  music_loop = loadSound(`assets/sounds/music loop.wav`);
 
   cowboy_song = loadSound(`assets/sounds/cowboy music.wav`);
   detective_song = loadSound(`assets/sounds/detective music.wav`);
@@ -175,8 +175,8 @@ function keyPressed() {
 
 //check if music is playing + play if its not
 function trymusic() {
-  if (!fc_Simulator_Song.isPlaying() || !detective_song.isPlaying() || !knight_song.isPlaying() || !vampire_song.isPlaying() || !racing_song.isPlaying() || !shooter_song.isPlaying() || !cowboy_song.isPlaying()) {
-    fc_Simulator_Song.loop();
+  if (!music_loop.isPlaying() || !detective_song.isPlaying() || !knight_song.isPlaying() || !vampire_song.isPlaying() || !racing_song.isPlaying() || !shooter_song.isPlaying() || !cowboy_song.isPlaying()) {
+    music_loop.loop();
   }
 }
 
@@ -295,7 +295,7 @@ function mousePressed() {
     let d = dist(mouseX, mouseY, 918, 290);
     if (d < saucerPiece1.width / 2 + 50 / 2) {
       state = `shooter`;
-      fc_Simulator_Song.stop();
+      music_loop.stop();
       shooter_song.play();
       fadeIn = 0;
       shooter_song.onended(returnToFlight);
@@ -304,7 +304,7 @@ function mousePressed() {
     let saturnDist = dist(mouseX, mouseY, 620, 160);
     if (saturnDist < saucerPiece1.width / 2 + 66 / 2) {
       state = `detective`;
-      fc_Simulator_Song.stop();
+      music_loop.stop();
       detective_song.play();
       fadeIn = 0;
       detective_song.onended(returnToFlight);
@@ -313,7 +313,7 @@ function mousePressed() {
     let uranusDist = dist(mouseX, mouseY, 568, 420);
     if (uranusDist < saucerPiece1.width / 2 + 54 / 2) {
       state = `cowboy`;
-      fc_Simulator_Song.stop();
+      music_loop.stop();
       cowboy_song.play();
       fadeIn = 0;
       cowboy_song.onended(returnToFlight);
@@ -322,7 +322,7 @@ function mousePressed() {
     let venusDist = dist(mouseX, mouseY, 853, 718);
     if (venusDist < saucerPiece1.width / 2 + 30 / 2) {
       state = `knight`;
-      fc_Simulator_Song.stop();
+      music_loop.stop();
       knight_song.play();
       fadeIn = 0;
       knight_song.onended(returnToFlight);
@@ -331,7 +331,7 @@ function mousePressed() {
     let mercuryDist = dist(mouseX, mouseY, 1330, 370);
     if (mercuryDist < saucerPiece1.width / 2 + 24 / 2) {
       state = `racing`;
-      fc_Simulator_Song.stop();
+      music_loop.stop();
       racing_song.play();
       fadeIn = 0;
       racing_song.onended(returnToFlight);
@@ -340,7 +340,7 @@ function mousePressed() {
     let jupiterDist = dist(mouseX, mouseY, 1410, 790);
     if (jupiterDist < saucerPiece1.width / 2 + 79 / 2) {
       state = `vampire`;
-      fc_Simulator_Song.stop();
+      music_loop.stop();
       vampire_song.play();
       fadeIn = 0;
       vampire_song.onended(returnToFlight);
@@ -355,7 +355,6 @@ function resetShipPosition() {
 
   saucerPiece2.x = 418
   saucerPiece2.y = 860
-
 
   moveSaucer();
   handleInput();
