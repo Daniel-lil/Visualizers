@@ -56,7 +56,7 @@ let saucerPiece2 = {
 }
 
 //telling program which state to begin inspect
-let state = `title`;
+let state = `flight simulation`;
 
 /**
 preloading images
