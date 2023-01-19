@@ -16,7 +16,7 @@ let titleScreen;
 let map;
 
 //declaring name of song
-let music_loop;
+let map_song;
 
 let cowboy_song;
 let detective_song;
@@ -72,14 +72,14 @@ function preload() {
   map = loadImage('assets/images/map.png');
   titleScreen = loadImage('assets/images/title screen.png');
   //preloading song
-  music_loop = loadSound(`assets/sounds/music loop.wav`);
 
-  cowboy_song = loadSound(`assets/sounds/cowboy music.wav`);
-  detective_song = loadSound(`assets/sounds/detective music.wav`);
-  knight_song = loadSound(`assets/sounds/knight music.wav`);
-  racing_song = loadSound(`assets/sounds/racing music.wav`);
-  shooter_song = loadSound(`assets/sounds/shooter music.wav`);
-  vampire_song = loadSound(`assets/sounds/vampire music.wav`);
+  map_song = loadSound(`assets/sounds/map song.mp3`);
+  cowboy_song = loadSound(`assets/sounds/cowboy song.mp3`);
+  detective_song = loadSound(`assets/sounds/detective song.mp3`);
+  knight_song = loadSound(`assets/sounds/knight song.mp3`);
+  racing_song = loadSound(`assets/sounds/racing song.mp3`);
+  shooter_song = loadSound(`assets/sounds/shooter song.mp3`);
+  vampire_song = loadSound(`assets/sounds/vampire song.mp3`);
 }
 
 /**
@@ -175,8 +175,8 @@ function keyPressed() {
 
 //check if music is playing + play if its not
 function trymusic() {
-  if (!music_loop.isPlaying() || !detective_song.isPlaying() || !knight_song.isPlaying() || !vampire_song.isPlaying() || !racing_song.isPlaying() || !shooter_song.isPlaying() || !cowboy_song.isPlaying()) {
-    music_loop.loop();
+  if (!map_song.isPlaying() || !detective_song.isPlaying() || !knight_song.isPlaying() || !vampire_song.isPlaying() || !racing_song.isPlaying() || !shooter_song.isPlaying() || !cowboy_song.isPlaying()) {
+    map_song.loop();
   }
 }
 
@@ -295,7 +295,7 @@ function mousePressed() {
     let d = dist(mouseX, mouseY, 918, 290);
     if (d < saucerPiece1.width / 2 + 50 / 2) {
       state = `shooter`;
-      music_loop.stop();
+      map_song.stop();
       shooter_song.play();
       fadeIn = 0;
       shooter_song.onended(returnToFlight);
@@ -304,7 +304,7 @@ function mousePressed() {
     let saturnDist = dist(mouseX, mouseY, 620, 160);
     if (saturnDist < saucerPiece1.width / 2 + 66 / 2) {
       state = `detective`;
-      music_loop.stop();
+      map_song.stop();
       detective_song.play();
       fadeIn = 0;
       detective_song.onended(returnToFlight);
@@ -313,7 +313,7 @@ function mousePressed() {
     let uranusDist = dist(mouseX, mouseY, 568, 420);
     if (uranusDist < saucerPiece1.width / 2 + 54 / 2) {
       state = `cowboy`;
-      music_loop.stop();
+      map_song.stop();
       cowboy_song.play();
       fadeIn = 0;
       cowboy_song.onended(returnToFlight);
@@ -322,7 +322,7 @@ function mousePressed() {
     let venusDist = dist(mouseX, mouseY, 853, 718);
     if (venusDist < saucerPiece1.width / 2 + 30 / 2) {
       state = `knight`;
-      music_loop.stop();
+      map_song.stop();
       knight_song.play();
       fadeIn = 0;
       knight_song.onended(returnToFlight);
@@ -331,7 +331,7 @@ function mousePressed() {
     let mercuryDist = dist(mouseX, mouseY, 1330, 370);
     if (mercuryDist < saucerPiece1.width / 2 + 24 / 2) {
       state = `racing`;
-      music_loop.stop();
+      map_song.stop();
       racing_song.play();
       fadeIn = 0;
       racing_song.onended(returnToFlight);
@@ -340,7 +340,7 @@ function mousePressed() {
     let jupiterDist = dist(mouseX, mouseY, 1410, 790);
     if (jupiterDist < saucerPiece1.width / 2 + 79 / 2) {
       state = `vampire`;
-      music_loop.stop();
+      map_song.stop();
       vampire_song.play();
       fadeIn = 0;
       vampire_song.onended(returnToFlight);
